@@ -1,0 +1,39 @@
+﻿@model List<AppUser>
+@{
+    ViewData["Title"] = "Chat";
+}
+
+<h1>Chat</h1>
+<h2>Users</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4">
+            <ul class=" list-group">
+                @foreach (AppUser appUser in Model)
+                {
+                    <li id="@appUser.Id" data-userName="@appUser.Name @appUser.SurName" class="userItem list-group-item">@appUser.Name @appUser.SurName <span style="width:10px; height:10px" class=" @(appUser.ConnectionId != null?"bg-success":"bg-secondary")  rounded-circle"></span></li>
+                }
+            </ul>
+        </div>
+        <div class="col-lg-8">
+            <div>
+                <h3 class="sender"></h3>
+            </div>
+            <div class="messageContainer">
+                <ul class="list-group">
+                    <li class="list-group-item">Salam</li>
+                    <li class="list-group-item">Salam===</li>
+                </ul>
+            </div>
+            <form>
+                <input type="hidden" name="userId" id="userId" value=""/>
+                <input type="text" name="message" value="" />
+                <button>send</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Script{ 
+    <script src="~/assets/js/realtime.js" asp-append-version="true"></script>
+}
